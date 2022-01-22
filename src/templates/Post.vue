@@ -5,7 +5,7 @@
       <header
         class="masthead"
         :style="{
-          backgroundImage: `url(${GRIDSOME_API_URL + $page.strapiArticle.act[0].url})`,
+          backgroundImage: `url(${$page.strapiArticle.act[0].url})`,
         }"
       >
         <div class="container position-relative px-4 px-lg-5">

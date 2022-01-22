@@ -8,7 +8,7 @@
       > -->
       <header
         class="masthead"
-        :style="{backgroundImage: `url(${GRIDSOME_API_URL + $page.allStrapiGeneral.edges[0].node.img.url})`}"
+        :style="{backgroundImage: `url(${$page.allStrapiGeneral.edges[0].node.img.url})`}"
       >
         <div class="container position-relative px-4 px-lg-5">
           <div class="row gx-4 gx-lg-5 justify-content-center">
