@@ -8,7 +8,7 @@
       > -->
       <header
         class="masthead"
-        :style="{backgroundImage: `url(${$page.allStrapiGeneral.edges[0].node.img.url})`}"
+        :style="{backgroundImage: `url(${GRIDSOME_API_URL + $page.allStrapiGeneral.edges[0].node.img.url})`}"
       >
         <div class="container position-relative px-4 px-lg-5">
           <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -29,7 +29,7 @@
             <!-- Post preview-->
             <div 
               class="post-preview" 
-              v-for="edge in $page.allStrapiArticle.edges"
+              v-for="edge in orgData"
               :key="edge.node.id"
             >
               <g-link :to="'/post/'+edge.node.id">
@@ -71,7 +71,7 @@
               :page-sizes="pageSizes"
               :page-size="pageSize"
               layout="total, sizes, prev, pager, next, jumper"
-              :total="orgData.length"
+              :total="$page.allStrapiArticle.edges.length"
               :page-count="totalPage"
               :current-page="1"
               @size-change="handleSizeChange"
@@ -200,7 +200,10 @@ export default {
   },
   mounted() {
     console.log(this.$page.allStrapiArticle.edges)
-    this.orgData = JSON.parse(JSON.stringify(this.$page.allStrapiArticle.edges))
+    if(this.orgData.length == 0){
+      this.orgData = JSON.parse(JSON.stringify(this.$page.allStrapiArticle.edges))
+    }
+    
     this.handleCurrentChange(1)
   },
   methods: {
@@ -219,7 +222,8 @@ export default {
       console.log(`当前页: ${val}`);
       console.log(this.orgData.slice((val-1)*this.pageSize,val*this.pageSize))
       // let p = this.$page.allStrapiArticle.edges;
-      this.$page.allStrapiArticle.edges = this.orgData.slice((val-1)*this.pageSize,val*this.pageSize)
+      // this.$page.allStrapiArticle.edges = this.orgData.slice((val-1)*this.pageSize,val*this.pageSize)
+      this.orgData = this.$page.allStrapiArticle.edges.slice((val-1)*this.pageSize,val*this.pageSize)
     }
   },
 };
